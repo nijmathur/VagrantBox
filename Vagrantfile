@@ -1,6 +1,18 @@
 # -*- mode: ruby -*-
 # vi: set ft=ruby :
 
+# Require the reboot plugin.
+#    IMPORTANT
+##########################################################
+
+# this vagrant box requires some plugins before running
+# vagrant up. This can be installed by running the following commands
+
+# vagrant plugin install vagrant-reload
+# vagrant plugin install winRM
+
+#require './vagrant-provision-reboot-plugin'
+
 # All Vagrant configuration is done below. The "2" in Vagrant.configure
 # configures the configuration version (we support older styles for
 # backwards compatibility). Please don't change it unless you know what
@@ -43,13 +55,19 @@ Vagrant.configure(2) do |config|
   # backing providers for Vagrant. These expose provider-specific options.
   # Example for VirtualBox:
   #
-  # config.vm.provider "virtualbox" do |vb|
-  #   # Display the VirtualBox GUI when booting the machine
-  #   vb.gui = true
-  #
-  #   # Customize the amount of memory on the VM:
-  #   vb.memory = "1024"
-  # end
+  config.vm.provider "virtualbox" do |vb|
+    # Display the VirtualBox GUI when booting the machine
+    vb.gui = true
+
+    # Customize the amount of memory on the VM:
+    vb.memory = "4096"
+    vb.cpus = 3
+    # using the virtualbox vboxmanage commands, set the network adapter to bridged
+    # see https://www.virtualbox.org/manual/ch08.html#idp46457708970512
+    # also, see https://www.vagrantup.com/docs/virtualbox/configuration.html
+    #vb.customize ["modifyvm", :id,"--nic1","bridged"]
+    #vb.customize ["modifyvm", :id,"--nicpromisc1","allow-all"]
+  end
   #
   # View the documentation for the provider you are using for more
   # information on available options.
@@ -68,4 +86,10 @@ Vagrant.configure(2) do |config|
   #   sudo apt-get update
   #   sudo apt-get install -y apache2
   # SHELL
+  config.vm.provision "shell", path: "provision.ps1"
+  # reboot the machine after installing basic .net install and before installing
+  # visual studio 2012
+  config.vm.provision :reload
+  config.vm.provision "shell", inline: "choco install visualstudio2012professional"
+  config.vm.provision "shell", inline: 'PkgMgr /iu:IIS-WebServerRole'
 end
