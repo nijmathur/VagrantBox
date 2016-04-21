@@ -13,8 +13,18 @@
   </li>
   <li>
     Install the vagrant plugins :
+    <table>
+    <tr>
+    <td>
     vagrant plugin install vagrant-reload
+    </td>
+    </tr>
+    <tr>
+    <td>
     vagrant plugin install winRM
+    </td>
+    </tr>
+    </table>
   </li>
   <li>
     Download the vagrantfile and powershell.ps1
