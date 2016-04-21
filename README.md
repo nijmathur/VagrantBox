@@ -12,6 +12,11 @@
     </table>
   </li>
   <li>
+    Install the vagrant plugins :
+    vagrant plugin install vagrant-reload
+    vagrant plugin install winRM
+  </li>
+  <li>
     Download the vagrantfile and powershell.ps1
   </li>
   <li>
