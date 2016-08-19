@@ -7,10 +7,10 @@ choco install atom
 choco install dotnet3.5
 choco install dotnet4.0
 choco install dotnet4.5.1
-choco install powershell
+#choco install powershell
 choco install aspnetmvc
 choco install aspnetmvc4.install
-"C:\Windows\System32\PkgMgr.exe" /iu:IIS-WebServerRole
+#"C:\Windows\System32\PkgMgr.exe" /iu:IIS-WebServerRole
 #choco install visualstudio2012professional
 #choco install resharper
 #choco install mssqlservermanagementstudio2014express
