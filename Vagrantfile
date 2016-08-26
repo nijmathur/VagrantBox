@@ -90,6 +90,5 @@ Vagrant.configure(2) do |config|
   # reboot the machine after installing basic .net install and before installing
   # visual studio 2012
   config.vm.provision :reload
-  config.vm.provision "shell", inline: "choco install visualstudio2012professional"
-  config.vm.provision "shell", inline: 'PkgMgr /iu:IIS-WebServerRole'
+  config.vm.provision "shell", inline: "choco install visualstudio2015community"
 end
